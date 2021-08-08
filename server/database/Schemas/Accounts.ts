@@ -10,6 +10,7 @@ const AccountsSchema: object = new mongoose.Schema(
      {
           username: stringRequired,
           password: stringRequired,
+          contacts: [this],
      },
      { timestamps: true }
 )

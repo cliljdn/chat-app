@@ -5,14 +5,12 @@ router.get('/users/accounts', (req: express.Request, res: express.Response) => {
      try {
           const io = req.app.get('socketio')
 
-          io.on('connection', (socket: any) => {
-               setInterval(() => {
-                    socket.emit('message', 'tangina mo')
-               }, 1000)
+          setInterval(() => {
+               io.emit('emi1', 'tangina mo')
+          }, 1000)
 
-               // socket.on('disconnect', () => {
-               //      console.log('user disconnected')
-               // })
+          io.on('disconnect', () => {
+               console.log('user disconnected')
           })
 
           res.json('haha')

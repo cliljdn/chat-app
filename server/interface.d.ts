@@ -1,8 +1,10 @@
-interface RouterInterface {
-     routerInit: (req: object | any, res: object | any) => void
+import { Request, Response } from 'express'
+
+declare global {
+     interface ExpressRouting {
+          ExpressRequest: Request
+          ExpressResponse: Response
+     }
 }
 
-interface stringRequired {
-     type: String
-     require: true
-}
+declare const ExpressResponse: Response
