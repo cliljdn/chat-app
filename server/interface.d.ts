@@ -1,10 +1,6 @@
-import { Request, Response } from 'express'
-
 declare global {
-     interface ExpressRouting {
-          ExpressRequest: Request
-          ExpressResponse: Response
+     interface NodeCallback {
+          (err: any, result?: undefined | null): void
+          (err: undefined | null, result: T): void
      }
 }
-
-declare const ExpressResponse: Response

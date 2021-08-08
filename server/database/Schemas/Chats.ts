@@ -1,15 +1,22 @@
-export {}
-const mongoose = require('mongoose')
+import { Schema, Document, model } from 'mongoose'
 const schemaNames = require('../../config/Constants/SchemaNames')
 
 const referenceToAccounts: object = {
-     type: mongoose.Schema.Types.ObjectId,
+     type: Schema.Types.ObjectId,
      ref: schemaNames.accounts,
 }
 
-const ChatSchema: object = new mongoose.Schema(
+interface ChatInterface {
+     message: string
+     sender: string
+     receiver: string
+     seen: boolean
+     timestamps: string
+}
+
+const ChatSchema: Schema = new Schema(
      {
-          message: stringRequired,
+          message: { type: String, require: true },
           sender: referenceToAccounts,
           receiver: referenceToAccounts,
           seen: { type: Boolean, default: false },
@@ -17,4 +24,4 @@ const ChatSchema: object = new mongoose.Schema(
      { timestamps: true }
 )
 
-module.exports = mongoose.model(schemaNames.chats, ChatSchema)
+module.exports = model<ChatInterface>(schemaNames.chats, ChatSchema)
