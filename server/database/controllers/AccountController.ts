@@ -87,6 +87,38 @@ class AccountContoller {
                next(err)
           }
      }
+
+     private addContact = async (
+          req: Request,
+          res: Response,
+          next: NextFunction
+     ) => {
+          try {
+               const { id }: { id: string } =
+                    await Authenticate.isAuthenticated(req)
+
+               const { contacts }: any = await this._model
+                    .findById(id)
+                    .populate('contacts')
+
+               const inArray: boolean = contacts?.some((el: any) =>
+                    el.equals(Types.ObjectId(req.body._id))
+               )
+               if (inArray) throw new Error('Contact Already Added')
+
+               const addedContacts: any = await this._model
+                    .findOneAndUpdate(
+                         { _id: Types.ObjectId(id) },
+                         { $push: { contacts: req.body._id } },
+                         { new: true }
+                    )
+                    .populate('contacts')
+
+               res.status(200).json(addedContacts.contacts)
+          } catch (err) {
+               next(err)
+          }
+     }
 }
 
 module.exports = new AccountContoller(AccountsModel)
