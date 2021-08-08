@@ -8,8 +8,11 @@ interface payload {
 class Authencation {
      public isAuthenticated = async (req: Request) => {
           const encrypted: string = req.headers['authorization']!
+          if (!encrypted) throw new Error('No Auth Provided')
 
           const decodedObj: object = await this.verify(encrypted)
+
+          return decodedObj
      }
 
      private sign = (payload: payload) => {
