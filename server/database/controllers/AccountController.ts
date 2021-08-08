@@ -119,6 +119,35 @@ class AccountContoller {
                next(err)
           }
      }
+
+     private removeContact = async (
+          req: Request,
+          res: Response,
+          next: NextFunction
+     ) => {
+          try {
+               const { id }: { id: string } =
+                    await Authenticate.isAuthenticated(req)
+
+               const user: any = await this._model
+                    .findById(id)
+                    .populate('contacts')
+
+               let tobeDeletedIndex: number = user.contacts.indexOf(
+                    Types.ObjectId(req.params._id)
+               )
+
+               console.log(tobeDeletedIndex)
+
+               user.contacts.splice(tobeDeletedIndex, 1)
+
+               await user.save()
+
+               res.status(200).json(user)
+          } catch (err) {
+               next(err)
+          }
+     }
 }
 
 module.exports = new AccountContoller(AccountsModel)
