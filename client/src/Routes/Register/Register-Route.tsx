@@ -1,7 +1,9 @@
 import './register-style.css'
 import { Link } from 'react-router-dom'
+import { Controller } from './registration-controller'
 
-const LoginRoute = () => {
+const RegisterRoute = () => {
+     const { handleInput, payload } = Controller()
      return (
           <div
                id='register-route'
@@ -11,10 +13,13 @@ const LoginRoute = () => {
                     <div className='card-body'>
                          <div className='mb-3'>
                               <label className='form-label fw-bold'>
-                                   Email address
+                                   Email address {payload.username}
                               </label>
                               <input
-                                   type='email'
+                                   onChange={(e) => handleInput(e)}
+                                   value={payload.username}
+                                   name='username'
+                                   type='text'
                                    className='form-control'
                                    placeholder='name@example.com'
                               />
@@ -25,6 +30,9 @@ const LoginRoute = () => {
                                    Password
                               </label>
                               <input
+                                   onChange={(e) => handleInput(e)}
+                                   value={payload.password}
+                                   name='password'
                                    type='password'
                                    className='form-control'
                                    placeholder='Password must have 1 Capital letter and number'
@@ -36,6 +44,9 @@ const LoginRoute = () => {
                                    Re-type Password
                               </label>
                               <input
+                                   onChange={(e) => handleInput(e)}
+                                   value={payload.retype}
+                                   name='retype'
                                    type='password'
                                    className='form-control'
                                    placeholder='name@example.com'
@@ -57,4 +68,4 @@ const LoginRoute = () => {
      )
 }
 
-export default LoginRoute
+export default RegisterRoute

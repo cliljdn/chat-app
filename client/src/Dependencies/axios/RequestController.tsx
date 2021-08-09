@@ -2,8 +2,8 @@ import axios, { AxiosInstance } from 'axios'
 
 interface payload {
      url: string
-     headers?: object
      data?: object
+     headers?: object
 }
 class RequestController {
      public _axiosInstance: AxiosInstance
@@ -27,7 +27,7 @@ class RequestController {
 
      public async instancePost(payload: payload) {
           try {
-               const headers: string | object = payload.headers ?? {}
+               const headers: object = payload.headers ?? {}
                const response = await this._axiosInstance.post(
                     payload.url,
                     payload.data,
