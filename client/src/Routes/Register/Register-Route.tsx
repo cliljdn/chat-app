@@ -1,10 +1,10 @@
-import './login-style.css'
+import './register-style.css'
 import { Link } from 'react-router-dom'
 
 const LoginRoute = () => {
      return (
           <div
-               id='login-route'
+               id='register-route'
                className=' d-flex justify-content-center align-items-center'>
                <div className='card w-50'>
                     <div className='card-header fw-bold fs-3'>Login</div>
@@ -30,15 +30,25 @@ const LoginRoute = () => {
                                    placeholder='Password must have 1 Capital letter and number'
                               />
                          </div>
+
+                         <div className='mb-3'>
+                              <label className='form-label fw-bold'>
+                                   Re-type Password
+                              </label>
+                              <input
+                                   type='password'
+                                   className='form-control'
+                                   placeholder='name@example.com'
+                              />
+                         </div>
                          <span>
-                              don't have an account?{' '}
-                              <Link to='/register'>Sign Up</Link>
+                              Back to Login? <Link to='/'>Login</Link>
                          </span>
                          <div className='button-container text-center m-3'>
                               <button
                                    type='button'
                                    className='btn btn-outline-secondary btn-lg fs-3'>
-                                   Login
+                                   Register
                               </button>
                          </div>
                     </div>

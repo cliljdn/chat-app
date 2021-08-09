@@ -3,11 +3,17 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import './Themes/global-themes.css'
 
+/* Redux */
+import { Provider } from 'react-redux'
+import { store } from './Dependencies/store/store'
+
 // IMPORTED BOOTSTRAP
 import 'bootstrap/dist/css/bootstrap.min.css'
 ReactDOM.render(
      <React.StrictMode>
-          <App />
+          <Provider store={store}>
+               <App />
+          </Provider>
      </React.StrictMode>,
      document.getElementById('root')
 )
